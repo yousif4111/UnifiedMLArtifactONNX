@@ -2,7 +2,7 @@
 
 This is a walkthrough in how the conversion of the simple machine learning models created by some of the common frameworks such Tensorflow and pytorch to ONNX format.
 
-## 1. Conversion of Tensorflow Models to ONNX
+## 1. 1️⃣Conversion of Tensorflow Models to ONNX1️⃣
 ___
 The following is a guide through the process of converting TensorFlow models to ONNX format and loading ONNX models into TensorFlow. 
 
@@ -83,12 +83,13 @@ ___
 
 ## 2. Conversion of Pytorch Models
 ___
-Now this is how make the same conversion with Pytorch models 
+
 
 ### Convert PyTorch Model to ONNX
-The conversion of a PyTorch model to ONNX format can be done directly within PyTorch itself, without the need for any external libraries Unlike TensorFlow.
+The conversion of a PyTorch model to ONNX format can be done directly within PyTorch itself using `torch.onnx.export()`, without the need for any external libraries Unlike TensorFlow. 
+However there is a catch, to e
 
-# Example:
+#### Example:
 
 
 
