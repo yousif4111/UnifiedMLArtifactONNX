@@ -15,7 +15,8 @@ ONNX (Open Neural Network Exchange) is an open standard format to represent mach
 
 ### Why ONNX? 🤔
 ___
-![image](https://github.com/yousif4111/UnifiedMLArtifactONNX/assets/46527978/f420b5dc-09f1-4169-baf7-a4571b3a26db)
+![image](https://github.com/yousif4111/UnifiedMLArtifactONNX/assets/46527978/1b2f05d3-0e92-4e6b-85cf-e2bb576e71c0)
+
 
 
 Storing ML/DL models in **ONNX** format offers:
