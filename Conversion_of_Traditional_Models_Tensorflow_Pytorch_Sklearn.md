@@ -87,10 +87,28 @@ ___
 
 ### Convert PyTorch Model to ONNX
 The conversion of a PyTorch model to ONNX format can be done directly within PyTorch itself using `torch.onnx.export()`, without the need for any external libraries Unlike TensorFlow. 
-However there is a catch, to exoprt a mdoel, when we call `torch.onnx.export()` function this will execute the model, recording a trace of waht operators are used to compute the outputs. Because export runs the model, we need to provide an input tensor x. The values in this can be random as long as it is the right type and size. 
+However there is a catch, to exoprt a mdoel, when we call `torch.onnx.export()` function this will execute the model, recording a trace of waht operators are used to compute the outputs. Because `export` runs the model, we need to provide an input tensor `x`. The values in this can be random as long as it is the right type and size. 
 
 #### Example:
+In this example we export the model with an input of batch_size 1, but then specify the first dimension as dynamic in the dynamic_axes parameter in torch.onnx.export(). The exported model will thus accept inputs of size [batch_size, 1, 224, 224] where batch_size can be variable.
 
+```python
+# Input to the model
+x = torch.randn(batch_size, 1, 224, 224, requires_grad=True)
+torch_out = torch_model(x)
+
+# Export the model
+torch.onnx.export(torch_model,               # model being run
+                  x,                         # model input (or a tuple for multiple inputs)
+                  "super_resolution.onnx",   # where to save the model (can be a file or file-like object)
+                  export_params=True,        # store the trained parameter weights inside the model file
+                  opset_version=10,          # the ONNX version to export the model to
+                  do_constant_folding=True,  # whether to execute constant folding for optimization
+                  input_names = ['input'],   # the model's input names
+                  output_names = ['output'], # the model's output names
+                  dynamic_axes={'input' : {0 : 'batch_size'},    # variable length axes
+                                'output' : {0 : 'batch_size'}})
+```
 
 
 To save a machine learning model to ONNX format, you can use the torch.onnx.export() function for PyTorch models or tools like onnxmltools for Scikit-learn models. Here's how to do it for a PyTorch model:
