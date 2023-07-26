@@ -18,13 +18,16 @@ ___
 ![image](https://github.com/yousif4111/UnifiedMLArtifactONNX/assets/46527978/1b2f05d3-0e92-4e6b-85cf-e2bb576e71c0)
 
 
+```diff
+Storing ML models in ONNX format offers:
++ Interoperability across frameworks
++ Cross-platform deployment
++ Optimized inference.
++ Enables Collaboration
++ Future-proofing
++ Versatile chocie for ML model storage.
+```
 
-Storing ML/DL models in **ONNX** format offers:
-- Interoperability across frameworks,
-- Cross-platform deployment, and
-- Optimized inference.
-
-It enables collaboration, future-proofing, and access to pre-trained models in the **ONNX model zoo**, making it a versatile choice for ML model storage.
 
 ## Proposed Methodology Scenario Example:
 ---
