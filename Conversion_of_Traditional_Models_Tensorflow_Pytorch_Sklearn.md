@@ -1,6 +1,6 @@
 # 💻Conversion of Traditional Models💻
 
-Here is a walkthrough in how the conversion of the traditional machine learning models created by most common frame works such as  to ONNX format.
+This is a walkthrough in how the conversion of the simple machine learning models created by some of the common frameworks such Tensorflow and pytorch to ONNX format.
 
 ## 1. Conversion of Tensorflow Models to ONNX
 ___
@@ -79,6 +79,17 @@ tf_rep.export_graph(tf_saved_model_path, as_text=False)  # Set as_text=True to s
 2. [Convert TensorFlow model to ONNX](https://learn.microsoft.com/en-us/windows/ai/windows-ml/tutorials/tensorflow-convert-model)
 3. [Tutorial: Import an ONNX Model into TensorFlow for Inference](https://thenewstack.io/tutorial-import-an-onnx-model-into-tensorflow-for-inference/)
 ___
+
+
+## 2. Conversion of Pytorch Models
+___
+Now this is how make the same conversion with Pytorch models 
+
+### Convert PyTorch Model to ONNX
+The conversion of a PyTorch model to ONNX format can be done directly within PyTorch itself, without the need for any external libraries Unlike TensorFlow.
+
+# Example:
+
 
 
 To save a machine learning model to ONNX format, you can use the torch.onnx.export() function for PyTorch models or tools like onnxmltools for Scikit-learn models. Here's how to do it for a PyTorch model:
