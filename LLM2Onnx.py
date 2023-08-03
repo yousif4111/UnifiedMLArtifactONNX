@@ -31,6 +31,27 @@ args = parser.parse_args()
 MODEL_TYPES_LIST = ["bart","bert","bert_tf","bert_keras","clip","gpt2","gpt2_tf","gpt_neox","swin","tnlr","t5","unet","vae","vit"]
 
 def get_model_from_directory(model_dir):
+    """
+    Description:
+    This function loads a pre-trained model from the specified 'model_dir'
+    and its corresponding tokenizer. It reads the model configuration
+    from the 'config.json' file in the model directory to determine the model type.
+    If the model type is supported (present in MODEL_TYPES_LIST), it returns the
+    loaded model, tokenizer, model type, number of attention heads, and hidden size.
+
+    Args:
+        model_dir (str): The path to the directory containing the pre-trained model.
+        
+    Outputs:
+        model (transformers.PreTrainedModel): The loaded pre-trained model.
+        tokenizer (transformers.PreTrainedTokenizer): The corresponding tokenizer for the model.
+        model_type (str): The type of the pre-trained model detected.
+        num_heads (int): The number of attention heads in the model's configuration.
+        hidden_size (int): The hidden size of the model's configuration.
+        
+        If the model type is not supported (not present in MODEL_TYPES_LIST),
+        it prints an error message and returns None.
+    """
 
     # --------------------------------------------------
     # Find model type and chekc if it can be converted
@@ -56,7 +77,7 @@ def get_model_from_directory(model_dir):
         =================== A Model has been detected succesfuuly ========================
                         The model detected is from type: {model_type}
         =================== A Model has been detected succesfuuly ========================
-""")
+    """)
 
     if model_type in MODEL_TYPES_LIST:
         # ---------------------------
@@ -118,6 +139,26 @@ convert(framework=frame_work, model=model_dir, output=Path(f"{output}/{model_typ
 # Optimization Part
 #-------------------
 def llm_onnx_optimization(output,model_type,num_heads,hidden_size):
+    """
+    Description:
+    This function performs optimization on the ONNX model file located at 'output' directory,
+    using the specified 'model_type', 'num_heads', and 'hidden_size'. It converts the model's
+    floating-point parameters to 16-bit floating-point (fp16) format to reduce memory usage
+    and improve performance on devices with support for reduced precision computations.
+    
+    Args:
+        output (str): The directory path where the original ONNX model is located.
+        model_type (str): The type of the model used for optimization (e.g., 'bert', 'gpt2').
+        num_heads (int): The number of attention heads in the model's configuration.
+        hidden_size (int): The hidden size of the model's configuration.
+        
+    Outputs:
+        None
+        
+    The function saves the optimized ONNX model to a new file with the name '{model_type}_optim_fp16.onnx'
+    in the same directory as the original model. If the optimization process encounters an error,
+    it may raise exceptions or print error messages, but it will not return any value.
+    """
     path_output_optim = Path(f"{output}/{model_type}_optim_fp16.onnx")
     optimized_model = optimizer.optimize_model(str(path_output), model_type=model_type, num_heads=num_heads, hidden_size=hidden_size)
     optimized_model.convert_float_to_float16()
