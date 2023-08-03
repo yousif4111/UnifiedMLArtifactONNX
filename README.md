@@ -39,13 +39,13 @@ Imagine you have trained a model on **TensorFlow**, and now you want to deploy i
 
 This repository contains the following files and directories:
 
-- `convert_to_onnx.py`: Python script for converting machine learning models to ONNX format.
-- `inference_on_onnx.py`: Python script for performing inference with ONNX models using ONNX Runtime.
-- `optimize_model.py`: Python script demonstrating model optimization techniques during ONNX conversion.
+- `LLM2Onnx.py`: Python script for converting Large Langauge models to ONNX format developed in both framework tensorflow or pytorch.
+  
+- `Converstion_of_Traditional_Model`: Walkthrough on how to perform the conversoin of regular model to onnx and load them.
+  
+- `MMdnn_guide`: Guide on how to use the [MMdnn](https://github.com/microsoft/MMdnn) open source tool developed by Microsoft as Universal Converter.
 
 - `requirements.txt`: Text file containing the required libraries for running the code examples.
-
-- `data/`: Directory containing sample data used in the scripts.
 
 - `README.md`: Markdown file containing the repository's documentation.
 
@@ -63,16 +63,17 @@ Here a list of Libraries used in this repository:
 | transformers  | `pip install transformers` |
 | torch         | `pip install torch`       |
 | tensorflow    | `pip install tensorflow`  |
-| torchvision   | `pip install torchvision` |
 | onnx          | `pip install onnx`       |
 | onnxruntime   | `pip install onnxruntime`|
 | optimum       | `pip install optimum`    |
 
 ## References
 
-1. [Markdown Guide](https://www.markdownguide.org/)
-2. [GitHub Markdown Cheatsheet](https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf)
-3. [CommonMark Specification](https://spec.commonmark.org/)
+1. [TensorFlow to ONNX](https://onnxruntime.ai/docs/tutorials/tf-get-started.html)
+2. [EXPORTING A MODEL FROM PYTORCH TO ONNX](https://pytorch.org/tutorials/advanced/super_resolution_with_onnxruntime.html)
+3. [MMdnn](https://github.com/microsoft/MMdnn)
+4. [Transformer Model Optimization Tool](https://onnxruntime.ai/docs/performance/transformers-optimization.html)
+
 
 
 
