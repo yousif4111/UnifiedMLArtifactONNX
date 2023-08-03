@@ -6,13 +6,6 @@
 # -------------------------------------------- How to run ------------------------------------------------------- 
 #        python LLM2Onnx.py --model_dir /path/to/model --output /path/to/onnx_output --framework pt --optim
 # -------------------------------------------- How to run -------------------------------------------------------
-import os
-import json
-from pathlib import Path
-from transformers import AutoModel, AutoTokenizer
-from transformers.convert_graph_to_onnx import convert
-from onnxruntime.transformers import optimizer
-import subprocess
 import argparse
 
 
@@ -23,6 +16,14 @@ parser.add_argument("--framework", type=str, default="pt", help="The framework u
 parser.add_argument("--optim", action="store_true", help="Whether to perform ONNX optimization (default: False)")
 
 args = parser.parse_args()
+
+import os
+import json
+from pathlib import Path
+from transformers import AutoModel, AutoTokenizer
+from transformers.convert_graph_to_onnx import convert
+from onnxruntime.transformers import optimizer
+import subprocess
 
 
 
@@ -54,17 +55,17 @@ def get_model_from_directory(model_dir):
     """
 
     # --------------------------------------------------
-    # Find model type and chekc if it can be converted
+    # Find model type and check if it can be converted
     # --------------------------------------------------
     # Check if the directory exists
     if not os.path.exists(model_dir):
-        print(f"Error: Directory '{model_dir}' does not exist.")
+        print(f"\nError: Directory '{model_dir}' does not exist.\n")
         return None
 
     # Load the config.json file
     config_file = os.path.join(model_dir, "config.json")
     if not os.path.exists(config_file):
-        print(f"Error: 'config.json' file not found in the directory '{model_dir}'.")
+        print(f"\nError: 'config.json' file not found in the directory '{model_dir}'.\n")
         return None
 
     # Read the model configuration from the 'config.json' file
@@ -80,9 +81,9 @@ def get_model_from_directory(model_dir):
     """)
 
     if model_type in MODEL_TYPES_LIST:
-        # ---------------------------
-        # Secont to load the model
-        # ---------------------------
+        # ---------------------------------------------------------
+        # Secont to load the model and find num_head & hidden_size
+        # ---------------------------------------------------------
         model = AutoModel.from_pretrained(model_dir)
         tokenizer = AutoTokenizer.from_pretrained(model_dir)
 
@@ -92,20 +93,21 @@ def get_model_from_directory(model_dir):
 
         return model,tokenizer,model_type,num_heads,hidden_size
     else:
+        print("\n====================================================")
         print(f"The model Detected is from type: {model_type}")
+        print("Unfortunately, the model is not supported yet. Yousif still hustling... :)\n")
         return None
 
 # argparse list
 model_dir = args.model_dir #"model_dir"
 output = args.output #"onnx_dir"
-frame_work = args.framework #"pt"
+frame_work = args.framework #"pt or tf"
 optim = args.optim
 #====================
 
 try:
     model, tokenizer, model_type, num_heads, hidden_size = get_model_from_directory(model_dir)
 except Exception:
-    print("Unfortunately, the model is not supported yet")
     exit()
 
 
